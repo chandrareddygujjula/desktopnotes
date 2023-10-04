@@ -1,0 +1,17 @@
+---
+- name: Configure Virtual IP
+  hosts: your_servers
+  become: yes  # Use sudo for privilege escalation
+
+  tasks:
+    - name: Configure Virtual IP
+      ansible.builtin.ip:
+        name: "{{ virtual_ip }}"  # The virtual IP address you want to configure
+        state: present
+      become: yes
+
+    - name: Ensure IP is active
+      ansible.builtin.ip:
+        name: "{{ virtual_ip }}"
+        state: up
+      become: yes

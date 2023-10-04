@@ -1,0 +1,10 @@
+---
+- name: Enable pcsd corosync pacemaker service
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure pcsd corosync pacemaker service is enabled and started
+      ansible.builtin.service:
+        name: pcsd corosync pacemaker
+        state: started
+        enabled: yes

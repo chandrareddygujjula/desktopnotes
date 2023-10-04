@@ -1,0 +1,16 @@
+hostnamectl set-hostname master
+     passwd hacluster
+     vi /etc/hosts
+     yum install httpd corosync pacemaker pcs
+     sudo yum install pacemaker corosync pcs resource-agents -y
+     systemctl start pcsd
+     systemctl enable pcsd
+     pcs host auth master node1 node2
+     pcs cluster setup mycluster --start master node1 node2
+     pcs cluster enable --all
+     pcs cluster status
+
+
+
+
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm

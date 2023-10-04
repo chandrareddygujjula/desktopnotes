@@ -1,0 +1,35 @@
+to install tomcat
+
+launch ec2 instant with t2.medium
+
+open in git bash 
+sudo -i
+apt-get update
+cd /opt
+sudo apt-get install openjdk-11-jdk -y
+java -version
+
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+tar -xvf apache tomcat file
+cd apachefile
+ls
+cd webapps/
+ls
+cd manager/
+ls
+cd META-INF/
+ls
+vi context.xml
+edit text
+cd ..
+upto apche
+cd conf/
+ls
+vi tomcat-users.xml
+edit text
+cd ..
+cd bin/
+ls
+./startup.sh
+copy ip:8080
+

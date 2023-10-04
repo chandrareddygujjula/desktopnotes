@@ -1,0 +1,16 @@
+---
+- name: Install Apache2 on Red Hat
+  hosts: all
+  become: yes  # Use sudo for privilege escalation if necessary
+
+  tasks:
+    - name: Install Apache2
+      package:
+        name: httpd
+        state: present
+
+    - name: Start Apache2 service and enable on boot
+      service:
+        name: httpd
+        state: started
+        enabled: yes

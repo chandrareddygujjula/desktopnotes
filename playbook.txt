@@ -1,0 +1,42 @@
+playbook 1  
+
+---
+- name: Install Pacemaker and Configure Cluster
+  hosts: node1 node2
+  become: yes  
+  tasks:
+    - name: Install Pacemaker and related packages
+      yum:
+        name:
+          - pacemaker
+          - pcs
+          - resource-agents
+          - corosync
+        state: present
+   - name: start pcsd
+     service:
+       name: pcsd.service
+       state: started
+
+
+playbook 2
+
+- hosts: node1
+  become: true
+  tasks:
+    - name: auth
+      become: yes
+      command: "pcs host auth node1 node2 -u hacluster -p teja"
+    - name: create cluster
+      become: yes
+      command: "pcs cluster setup redhatcluster node1 node2"
+    - name: start cluster
+      become: yes
+      command: "pcs cluster start --all"
+    - name: enable pcsd corosync pacemaker
+      service:
+        name:
+          - pcsd.service
+          - corosync
+          - pacemaker
+        enabled: yes
